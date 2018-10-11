@@ -26,6 +26,15 @@ public class Exit {
         void execute(int statusCode, String message);
     }
 
+    // 两个方法区别：
+    //
+    // System.exit:
+    //     Java虚拟机退出包括两个阶段：
+    //     第一个阶段：会以某种未指定的顺序启动所有已注册钩子，并且允许它们同时运行直至结束
+    //     第二个阶段：如果已启用runFinalizersOnExit设置为true，则运行所有未调用的终结方法（finalizer方法）
+    // Runtime.getRuntime().halt()
+    //     不会调用钩子和finalizer方法，直接退出虚拟机
+
     private static final Procedure DEFAULT_HALT_PROCEDURE = new Procedure() {
         @Override
         public void execute(int statusCode, String message) {
