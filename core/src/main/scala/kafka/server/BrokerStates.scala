@@ -55,6 +55,11 @@ package kafka.server
  *
  * Custom states is also allowed for cases where there are custom kafka states for different scenarios.
  */
+
+// sealed 关键字主要有2个作用：
+// 1. 其修饰的trait，class只能在当前文件里面被继承
+// 2. 用sealed修饰这样做的目的是告诉scala编译器在检查模式匹配的时候，让scala知道这些case的所有情况，
+//    scala就能够在编译的时候进行检查，看你写的代码是否有没有漏掉什么没case到，减少编程的错误。
 sealed trait BrokerStates { def state: Byte }
 case object NotRunning extends BrokerStates { val state: Byte = 0 }
 case object Starting extends BrokerStates { val state: Byte = 1 }
